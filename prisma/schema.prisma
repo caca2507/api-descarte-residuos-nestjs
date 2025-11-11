@@ -1,0 +1,33 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db" 
+}
+
+// Define o gerador do cliente
+generator client {
+  provider = "prisma-client-js"
+}
+
+// --- Nossos Modelos ---
+
+model PontoDescarte {
+  id        Int      @id @default(autoincrement())
+  nomeLocal String
+  bairro    String
+  tipoLocal String 
+  categoria String 
+  latitude  Float
+  longitude Float
+
+  registros RegistroDescarte[]
+}
+
+model RegistroDescarte {
+  id          Int      @id @default(autoincrement())
+  nomeUsuario String
+  data        DateTime
+  tipoResiduo String 
+
+  ponto     PontoDescarte @relation(fields: [pontoId], references: [id])
+  pontoId   Int
+}
