@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Descarte de Resíduos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>♻️ Gestão de Resíduos</h1>
+    </header>
+
+    <main>
+        <section class="card">
+            <h2>📍 Cadastrar Ponto de Descarte</h2>
+            <form id="form-ponto">
+                <input type="text" id="nomeLocal" placeholder="Nome do Local" required>
+                <input type="text" id="bairro" placeholder="Bairro" required>
+                <select id="tipoLocal" required>
+                    <option value="">Selecione o Tipo</option>
+                    <option value="publico">Público</option>
+                    <option value="privado">Privado</option>
+                </select>
+                <input type="text" id="categoria" placeholder="Categoria (ex: Vidro, Papel)" required>
+                <div class="geo-inputs">
+                    <input type="number" step="any" id="latitude" placeholder="Latitude" required>
+                    <input type="number" step="any" id="longitude" placeholder="Longitude" required>
+                </div>
+                <button type="submit">Cadastrar Ponto</button>
+            </form>
+        </section>
+
+        <section class="card">
+            <h2>🗑️ Registrar Descarte</h2>
+            <form id="form-descarte">
+                <input type="text" id="nomeUsuario" placeholder="Seu Nome" required>
+                <select id="pontoId" required>
+                    <option value="">Carregando pontos...</option>
+                </select>
+                <input type="text" id="tipoResiduo" placeholder="Tipo de Resíduo" required>
+                <input type="datetime-local" id="dataDescarte" required>
+                <button type="submit">Registrar Descarte</button>
+            </form>
+        </section>
+
+        <section class="card dashboard">
+            <h2>📊 Relatório Resumido</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3>Total Pontos</h3>
+                    <p id="dash-total-pontos">-</p>
+                </div>
+                <div class="stat-item">
+                    <h3>Total Usuários</h3>
+                    <p id="dash-total-users">-</p>
+                </div>
+                <div class="stat-item">
+                    <h3>Resíduo + Comum</h3>
+                    <p id="dash-comum">-</p>
+                </div>
+                <div class="stat-item">
+                    <h3>Local + Ativo</h3>
+                    <p id="dash-local-top">-</p>
+                </div>
+            </div>
+            <button onclick="carregarRelatorio()">Atualizar Relatório</button>
+        </section>
+
+        <section class="card full-width">
+            <h2>📜 Histórico de Descartes</h2>
+            <button onclick="carregarHistorico()">Recarregar Lista</button>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Usuário</th>
+                        <th>Resíduo</th>
+                        <th>Local</th>
+                    </tr>
+                </thead>
+                <tbody id="tabela-corpo">
+                    </tbody>
+            </table>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
